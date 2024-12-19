@@ -1,4 +1,4 @@
-import { data } from "../libs/data.js";
+import { data } from "../libs/books.js";
 
 // Creates IDs for each book so we dont have to message around with uuvidID 
 let bookID = 0;
