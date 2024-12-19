@@ -1,0 +1,17 @@
+{
+  "name": "week-4-rest-api-hackathon-themothernoders",
+  "version": "1.0.0",
+  "description": "Team plan",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bin/www.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

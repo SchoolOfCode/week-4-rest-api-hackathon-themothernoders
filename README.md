@@ -1,1 +1,4 @@
-Feel free to delete this and start from scratch.
+Team plan
+
+MVP 1 - Create GET method
+
