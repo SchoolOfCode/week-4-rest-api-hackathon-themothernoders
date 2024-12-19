@@ -13,3 +13,9 @@ export const originalBook = books.map((book) => {
 export async function getBook() {
   return [...books]; 
 }
+
+
+
+export async function getBookById(bookID) {
+  return books.find(({ id }) => id === bookID);
+}
