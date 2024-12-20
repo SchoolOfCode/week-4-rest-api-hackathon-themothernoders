@@ -53,7 +53,9 @@ router.patch("/:id", async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({ success: false });
     }
-    const updatedBook = await updateBookById(req.params.id, req.body);
+    //const bookId = Number(req.params.id);
+    //req.params.id is a string! we needed to convert it to a number first
+    const updatedBook = await updateBookById(+req.params.id, req.body);
     if (!updatedBook) {
       return res.status(404).json({ success: false });
     }
