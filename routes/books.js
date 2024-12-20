@@ -1,10 +1,14 @@
 import express from "express";
-import { getBook } from "../models/books.js";
-import { getBookById } from "../models/books.js";
+
+import {
+  getBook,
+  getBookById,
+  createBook,
+} from "../models/books.js";
 
 const router = express.Router();
 
-// Handle GET request to fetch all books - 
+// Handle GET request to fetch all books
 router.get("/", async function (req, res) {
   try {
     const books = await getBook();
@@ -14,7 +18,6 @@ router.get("/", async function (req, res) {
     res.status(500).json({ success: false, message: error.message });
   }
 });
-
 
 // Handle GET request to fetch books by id
 router.get("/:id", async (req, res) => {
@@ -30,5 +33,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Handle POST request to add book
+router.post("/", async function (req, res) {
+  try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({ success: false });
+    }
+    const newBook = await createBook(req.body);
+    res.status(201).json({ success: true, payload: newBook });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
 
 export default router;
