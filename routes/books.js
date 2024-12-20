@@ -4,7 +4,8 @@ import {
   getBook,
   getBookById,
   createBook,
-  updateBookById
+  updateBookById,
+  deleteBookById,
 } from "../models/books.js";
 
 const router = express.Router();
@@ -47,7 +48,7 @@ router.post("/", async function (req, res) {
   }
 });
 
-// Task 6 - Update a particular book
+// MVP 3 - Update a particular book
 router.patch("/:id", async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -60,6 +61,19 @@ router.patch("/:id", async (req, res) => {
       return res.status(404).json({ success: false });
     }
     res.json({ success: true, payload: updatedBook });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+//MVP 3 - delete a book
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedBook = await deleteBookById(parseInt(+req.params.id));
+    if (!deletedBook) {
+      return res.status(404).json({ success: false });
+    }
+    res.json({ success: true, payload: deletedBook });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
