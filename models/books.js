@@ -14,8 +14,15 @@ export async function getBook() {
   return [...books]; 
 }
 
-
-
 export async function getBookById(bookID) {
   return books.find(({ id }) => id === bookID);
+}
+
+export async function createBook(newBook) {
+  const created = {
+    ...newBook,
+    id: ++bookID,
+  };
+  books = [...books, created];
+  return created;
 }
