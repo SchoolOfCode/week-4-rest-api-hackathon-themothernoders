@@ -4,6 +4,7 @@ import {
   getBook,
   getBookById,
   createBook,
+  updateBookById
 } from "../models/books.js";
 
 const router = express.Router();
@@ -41,6 +42,22 @@ router.post("/", async function (req, res) {
     }
     const newBook = await createBook(req.body);
     res.status(201).json({ success: true, payload: newBook });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// Task 6 - Update a particular book
+router.patch("/:id", async (req, res) => {
+  try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({ success: false });
+    }
+    const updatedBook = await updateBookById(req.params.id, req.body);
+    if (!updatedBook) {
+      return res.status(404).json({ success: false });
+    }
+    res.json({ success: true, payload: updatedBook });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
