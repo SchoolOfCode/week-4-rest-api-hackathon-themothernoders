@@ -49,3 +49,16 @@ export async function updateBookById(bookId, updates) {
 
   return updated;
 }
+
+//function to handle DELETE request
+export async function deleteBookById(bookId) {
+  const index = findBookIndexById(bookId);
+
+  if (index === -1) {
+    return;
+  }
+
+  const deleted = books[index];
+  books = [...books.slice(0, index), ...books.slice(index + 1)];
+  return deleted;
+}
